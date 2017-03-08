@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const User    = require('../models/user');
+const Schema   = mongoose.Schema;
+const User     = require('../models/user');
 
 const venueSchema = new mongoose.Schema({
   _user: {
@@ -12,11 +13,11 @@ const venueSchema = new mongoose.Schema({
   },
   description: [{
     type: String,
-    required: [true, 'A description is required']
+    // required: [true, 'A description is required']
   }],
   location: {
     type: String,
-    required: [true, 'A location is required']
+    // required: [true, 'A location is required']
   }
 });
 

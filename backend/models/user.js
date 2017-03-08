@@ -6,14 +6,10 @@ const Venue    = require('../models/venue')
 const userSchema = new Schema({
   username : String,
   password : String,
-  _artist   : {
-    type: Schema.ObjectId,
-    ref: "Artist"
-  },
-  _venue   : {
-    type: Schema.ObjectId,
-    ref: "Venue"
-  },
+  type     : {
+        type: String,
+        enum: ['Artist', 'Venue']
+      }
 }, {
   timestamps: {
     createdAt: "created_at",

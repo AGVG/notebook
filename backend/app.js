@@ -7,8 +7,9 @@ var bodyParser   = require('body-parser');
 const passport   = require('./config/passport');
 const cors       = require('cors');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+var auth    = require('./routes/auth');
+var artists = require('./routes/artists');
+var venues  = require('./routes/venues');
 
 require('./config/database');
 var app = express();
@@ -16,7 +17,7 @@ var app = express();
 var corsOptions = {credentials: true, origin: 'http://localhost:4200'};
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.set('view engine', 'jade');
 
 app.options('*', cors(corsOptions));
 app.use(cors(corsOptions));
@@ -30,8 +31,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
+app.use('/', auth);
+app.use('/api/venues', venues);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,0 +1,14 @@
+<h1> venue list </h1>
+<div>
+  <div class="form-group">
+    <label for="location">Location</label>
+    <input class="form-control" id="location" placeholder="Address" name="location">
+  </div>
+  <div id="map-canvas"></div>
+  <div *ngFor="let venue of venues" class="item">
+    <h3> {{ venue.name }} </h3>
+    <p> {{ venue.description }} </p>
+    <p> {{ venue.location }} </p>
+    <a [routerLink]="['/venue', venue._id]"> View Details </a>
+  </div>
+</div>
