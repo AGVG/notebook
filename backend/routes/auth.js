@@ -48,9 +48,13 @@ router.post("/login", function(req, res) {
 router.post("/signup", (req, res, next) => {
   //Saving User
   var token;
-  var username = req.body.username;
-  var password = req.body.password;
-  var type     = req.body.type;
+  var username    = req.body.username;
+  var password    = req.body.password;
+  var type        = req.body.type;
+  var name        = req.body.name;
+  var description = req.body.description;
+  var genre       = Array.isArray(req.body.genre) ? req.body.genre : [req.body.genre];
+  var location    = req.body.location;
 
   if (!username || !password) {
     res.status(400).json({ message: "Provide username and password" });
@@ -69,33 +73,16 @@ router.post("/signup", (req, res, next) => {
     var newUser = User({
       username,
       password: hashPass,
-      type,
+      type
     });
-
-    newUser.save((err, user) => {
-      if (err) {
-        res.status(400).json({ message: err });
-      } else {
-        var payload = {id: user._id};
-        // console.log('user', user);
-        token = jwt.sign(payload, jwtOptions.secretOrKey);
-      }
-    });
-
     //Saving Artist or Venue
       var _user       = newUser._id;
-      var name        = req.body.name;
-      var description = req.body.description;
-      var genre       = Array.isArray(req.body.genre) ? req.body.genre : [req.body.genre];
-      var location    = req.body.location;
 
       if (newUser.type === "Artist"){
         var newArtist = Artist({ _user, name, genre, location});
         newArtist.save((err, artist) =>{
           if (err) {
             res.status(400).json({ message: err });
-          } else {
-            res.status(200).json({message: "artist ok", token: token});
           }
         });
       } else if (newUser.type === "Venue") {
@@ -103,11 +90,18 @@ router.post("/signup", (req, res, next) => {
         newVenue.save((err, venue) =>{
           if (err) {
             res.status(400).json({ message: err });
-          } else {
-            res.status(200).json({message: "venue ok", token: token});
           }
         });
       }
+      newUser.save((err, user) => {
+        if (err) {
+          res.status(400).json({ message: err });
+        } else {
+          var payload = {id: user._id};
+          token = jwt.sign(payload, jwtOptions.secretOrKey);
+          res.status(200).json({message: "venue ok", token: token});
+        }
+      });
   });
 });
 
