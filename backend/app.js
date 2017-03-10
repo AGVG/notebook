@@ -33,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', auth);
 app.use('/api/venues', venues);
+app.use('/api/artists', artists);
 
 
 // catch 404 and forward to error handler

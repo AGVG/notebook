@@ -1,7 +1,7 @@
-var express = require('express');
+var express    = require('express');
 const mongoose = require('mongoose');
-var router = express.Router();
-const Venue = require('../models/venue');
+var router     = express.Router();
+const Venue    = require('../models/venue');
 
 
 /* GET Venue Listing */

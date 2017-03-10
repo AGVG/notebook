@@ -1,0 +1,7 @@
+ul#list li{
+  display:inline !important;
+}
+
+.queryList{
+  color: black;
+}

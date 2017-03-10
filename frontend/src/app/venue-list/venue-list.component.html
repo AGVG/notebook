@@ -6,9 +6,11 @@
   </div>
   <div id="map-canvas"></div>
   <div *ngFor="let venue of venues" class="item">
-    <h3> {{ venue.name }} </h3>
-    <p> {{ venue.description }} </p>
-    <p> {{ venue.location }} </p>
-    <a [routerLink]="['/venue', venue._id]"> View Details </a>
+    <div [hidden]="venue.hideme">
+      <h3> {{ venue.name }} </h3>
+      <p> {{ venue.description }} </p>
+      <p> {{ venue.location }} </p>
+      <a [routerLink]="['/venue', venue._id]"> View Details </a>
+    </div>
   </div>
 </div>

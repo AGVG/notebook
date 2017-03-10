@@ -80,6 +80,9 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
     let input = document.getElementById('location');
     let autocomplete = new google.maps.places.Autocomplete(input);
+    autocomplete.addListener("place_changed", ()=>{
+      return this.newUser.location = autocomplete.getPlace().formatted_address;
+    })
   }
 
   signup() {

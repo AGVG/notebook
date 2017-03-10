@@ -1,0 +1,34 @@
+<h1> Artist list </h1>
+<div>
+  <label for="artists_name"> Search Artists: </label>
+  <input id="artists_name" placeholder="Filter By Names" type="text" [(ngModel)]="pattern">
+
+  <label for="genre">Genre</label>
+  <input #genreInput class="validate filter-input" placeholder="Filter By Genres" type="text"
+  [(ngModel)]='query'(keyup)='filter()'>
+
+  <div class="suggestions" *ngIf="filteredList.length > 0">
+      <ul *ngFor="let genre of filteredList" >
+          <li >
+              <a class="queryList" #test
+              (click)="select(genre); addTodo(genreInput.value)">{{genre}}</a>
+              <hr>
+          </li>
+      </ul>
+  </div>
+</div>
+
+  <div *ngFor="let artist of artists
+  | filter:'name':pattern; let i = index" class="item">
+    <div [class]="artist.name" [hidden]="artist.hideme"
+    *ngIf='query == "" || artist.genre.includes(query)'>
+      <h3> {{ artist.name }} </h3>
+        <ul>
+          <li *ngFor="let one of artist.genre">
+            {{one}}
+          </li>
+        </ul>
+      <p> {{ artist.location }} </p>
+      <a [routerLink]="['/artist', artist._id]"> View Details </a>
+    </div>
+  </div>
