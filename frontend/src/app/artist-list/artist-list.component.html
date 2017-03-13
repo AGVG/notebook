@@ -1,9 +1,16 @@
-<h1> Artist list </h1>
+<h1> Artist Finder</h1>
 <div>
-  <label for="artists_name"> Search Artists: </label>
-  <input id="artists_name" placeholder="Filter By Names" type="text" [(ngModel)]="pattern">
 
-  <label for="genre">Genre</label>
+  <div class="form-group">
+    <input class="form-control" id="location" placeholder="Enter a Location" name="location">
+  </div>
+
+  <select class="browser-default" name='radius_value' [(ngModel)]="radius" (change)="onSelect()">
+    <option value="" disabled selected>Choose a Radius</option>
+    <option *ngFor="let radius of radiuses" [value]="radius.value">{{radius.text}}</option>
+  </select>
+
+  <input id="artists_name" placeholder="Filter By Names" type="text" [(ngModel)]="pattern">
   <input #genreInput class="validate filter-input" placeholder="Filter By Genres" type="text"
   [(ngModel)]='query'(keyup)='filter()'>
 
@@ -17,18 +24,21 @@
       </ul>
   </div>
 </div>
-
+<span id="sol"></span>
   <div *ngFor="let artist of artists
   | filter:'name':pattern; let i = index" class="item">
     <div [class]="artist.name" [hidden]="artist.hideme"
     *ngIf='query == "" || artist.genre.includes(query)'>
-      <h3> {{ artist.name }} </h3>
-        <ul>
-          <li *ngFor="let one of artist.genre">
-            {{one}}
-          </li>
-        </ul>
-      <p> {{ artist.location }} </p>
-      <a [routerLink]="['/artist', artist._id]"> View Details </a>
+      <div class="lines"></div>
+        <h3> {{ artist.name }} </h3>
+          <ul id="list">
+            <li *ngFor="let one of artist.genre">
+              {{one}},
+            </li>
+          </ul>
+        <p> {{ artist.location }} </p>
+        <a [routerLink]="['/artist', artist._id]"> View Details </a>
+        <div class="lines"></div>
+      <br>
     </div>
   </div>

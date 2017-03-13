@@ -39,7 +39,7 @@ import { FilterPipe } from './pipes/filter.pipe';
     RouterModule.forRoot(routes),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDcawoqSxq0XhugyPjDyfxchcJmLGiP9EQ',
-      libraries: ['places']
+      libraries: ['places', 'geometry']
     })
   ],
   providers: [SessionService, VenueService, MapService, ArtistService],

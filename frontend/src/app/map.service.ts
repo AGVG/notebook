@@ -4,6 +4,7 @@ declare let google:any;
 @Injectable()
 export class MapService {
   initialMap;
+  shape;
   constructor() { }
 
   autocomplete(map) {
