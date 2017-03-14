@@ -15,4 +15,18 @@ router.get('/', (req, res, next) => {
     });
 });
 
+router.get('/:id', (req, res) => {
+  if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    return res.status(400).json({ message: 'Specified id is not valid' });
+  }
+
+  Artist.findById(req.params.id, (err, Artists) => {
+      if (err) {
+        return res.send(err);
+      }
+      console.log(Artists);
+      return res.json(Artists);
+    });
+});
+
 module.exports = router;

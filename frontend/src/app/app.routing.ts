@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { ArtistListComponent } from './artist-list/artist-list.component';
 import { VenueListComponent } from './venue-list/venue-list.component';
 import { SessionService } from './session.service';
+import { ArtistDetailsComponent } from './artist-details/artist-details.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -13,5 +14,6 @@ export const routes: Routes = [
     { path: 'signup', component: SignupComponent },
     { path: 'venues', component: VenueListComponent },
     { path: 'artists', component: ArtistListComponent },
+    { path: 'artists/:id', component: ArtistDetailsComponent },
     { path: '**', redirectTo: '' }
 ];

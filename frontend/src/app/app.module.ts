@@ -14,6 +14,8 @@ import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from './home/home.component';
 import { VenueListComponent } from './venue-list/venue-list.component';
 import { ArtistListComponent } from './artist-list/artist-list.component';
+import { ArtistDetailsComponent } from './artist-details/artist-details.component';
+
 
 import { SessionService } from './session.service';
 import { VenueService } from './venue.service';
@@ -30,7 +32,8 @@ import { FilterPipe } from './pipes/filter.pipe';
     HomeComponent,
     VenueListComponent,
     ArtistListComponent,
-    FilterPipe
+    FilterPipe,
+    ArtistDetailsComponent
   ],
   imports: [
     BrowserModule,

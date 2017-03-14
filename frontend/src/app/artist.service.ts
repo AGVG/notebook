@@ -14,4 +14,9 @@ export class ArtistService {
     return this.http.get(`${this.BASE_URL}`)
       .map((res) => res.json());
   }
+
+  get(id) {
+    return this.http.get(`${this.BASE_URL}/${id}`)
+      .map((res) => res.json());
+  }
 }

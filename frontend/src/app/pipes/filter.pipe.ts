@@ -5,15 +5,21 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterPipe implements PipeTransform {
 
-  transform(items: any[], field: string, value: string): any[] {
+  transform(items: any[], query: string, value: string): any[] {
     if (!items) {
       return [];
     }
 
-    if (!value) {
-      return items;
-    }
-
-    return items.filter(it => it[field].match(new RegExp(value, 'i')));
+    return items.filter((it) => {
+      if (value && query) {
+        return it.name.includes(value) && it.genre.includes(query);
+      } else if (value){
+        return it.name.includes(value);
+      } else if (query){
+        return it.genre.includes(query)
+      } else {
+        return true;
+      }
+    });
   }
 }

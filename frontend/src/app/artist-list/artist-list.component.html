@@ -1,4 +1,7 @@
-<h1> Artist Finder</h1>
+<h3>Local Artist Finder</h3>
+
+<br><br>
+
 <div>
 
   <div class="form-group">
@@ -6,39 +9,44 @@
   </div>
 
   <select class="browser-default" name='radius_value' [(ngModel)]="radius" (change)="onSelect()">
-    <option value="" disabled selected>Choose a Radius</option>
+    <option value="-1" disabled selected>Choose a Radius</option>
     <option *ngFor="let radius of radiuses" [value]="radius.value">{{radius.text}}</option>
   </select>
 
+  <br>
+
   <input id="artists_name" placeholder="Filter By Names" type="text" [(ngModel)]="pattern">
-  <input #genreInput class="validate filter-input" placeholder="Filter By Genres" type="text"
-  [(ngModel)]='query'(keyup)='filter()'>
+
+  <input #genreInput class="validate filter-input" placeholder="Filter By Genres" type="text" [(ngModel)]='query'(keyup)='filter()'>
 
   <div class="suggestions" *ngIf="filteredList.length > 0">
-      <ul *ngFor="let genre of filteredList" >
-          <li >
-              <a class="queryList" #test
-              (click)="select(genre); addTodo(genreInput.value)">{{genre}}</a>
-              <hr>
-          </li>
-      </ul>
+    <ul *ngFor="let genre of filteredList" >
+      <li>
+        <a class="queryList" (click)="select(genre)">{{genre}}</a>
+        <hr>
+      </li>
+    </ul>
   </div>
 </div>
-<span id="sol"></span>
-  <div *ngFor="let artist of artists
-  | filter:'name':pattern; let i = index" class="item">
-    <div [class]="artist.name" [hidden]="artist.hideme"
-    *ngIf='query == "" || artist.genre.includes(query)'>
-      <div class="lines"></div>
-        <h3> {{ artist.name }} </h3>
-          <ul id="list">
-            <li *ngFor="let one of artist.genre">
-              {{one}},
-            </li>
-          </ul>
-        <p> {{ artist.location }} </p>
-        <a [routerLink]="['/artist', artist._id]"> View Details </a>
-        <div class="lines"></div>
-      <br>
+
+<br><br>
+
+<div *ngFor="let artist of artists | filter:query:pattern; let i = index" class="item" [hidden]="artist.showme">
+  <div [class]="artist.name">
+    <div class="box">
+      <div class="lines"><span class="sol"><img src="../../assets/images/sol_360.png"></span><span class="name"><h3>&nbsp;{{ artist.name }}</h3></span></div>
+         <div class="info">
+            <ul>
+              <li class="list"><em>{{ artist.location }}</em>&nbsp;</li>
+              <li *ngFor="let one of artist.genre" class="list">&#9836;&nbsp;<em>{{one}}</em></li>
+              <li class="list"><a [routerLink]="['/artists', artist._id]" class="details"><img src="../../assets/images/coda.png">&nbsp;View Details</a></li>
+            </ul>
+            <hr>
+            <iframe src="https://embed.spotify.com/?uri=spotify:track:2nTsKOXIVGDf2iPeVQO2Gm" width="100%" height="100" frameborder="0" allowtransparency="true"></iframe>
+        </div>
+      </div>
     </div>
-  </div>
+
+    <br><br>
+
+</div>

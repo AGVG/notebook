@@ -59,12 +59,15 @@ export class ArtistListComponent implements OnInit {
   ]
 
   radiuses = [
-        {value:'1000', text:'1 km from your location'},
-        {value:'5000', text:'5 km from your location'},
-        {value:'10000', text:'10 km from your location'},
-        {value:'25000', text:'25 km from your location'},
-        {value:'100000', text:'100 km from your location'},
-        {value:'200000', text:'200 km from your location'},
+        {value:'1000', text:'1 km'},
+        {value:'5000', text:'5 km'},
+        {value:'10000', text:'10 km'},
+        {value:'15000', text:'15 km'},
+        {value:'20000', text:'20 km'},
+        {value:'25000', text:'25 km'},
+        {value:'30000', text:'30 km'},
+        {value:'100000', text:'100 km'},
+        {value:'200000', text:'200 km'},
         {value:'6371000', text:'All Artists'},
     ];
 
@@ -73,8 +76,8 @@ export class ArtistListComponent implements OnInit {
   artistLocation;
   filteredList = [];
   genre;
-  hideme: any = {};
-  radius;
+  showme: any = {};
+  radius = -1;
   distance;
   radiusValue: number;
   inputLocation;
@@ -91,9 +94,9 @@ ngOnInit() {
   this.artist.getList()
     .subscribe((result) =>{
       this.artists = result;
-      this.artists.forEach((artist) =>{
-        artist.hideme = true;
-      })
+      // this.artists.forEach((artist) =>{
+      //   artist.showme = true;
+      // })
 
         let input = document.getElementById('location');
         let autocomplete = new google.maps.places.Autocomplete(input);
@@ -107,16 +110,22 @@ ngOnInit() {
                if (status == google.maps.GeocoderStatus.OK) {
                   this.artistLocation = results[0].geometry.location;
                   this.distance = google.maps.geometry.spherical.computeDistanceBetween(this.inputLocation, this.artistLocation);
-                  if(this.radiusValue === undefined || this.distance > this.radiusValue ){
+                  if(this.radiusValue === undefined){
                     this.ngZone.run(() => {
-                      artist.hideme = true;
+                      artist.showme = true;
                     });
-                  } else{
+                  } else if ( this.distance > this.radiusValue ){
                     this.ngZone.run(() => {
-                      artist.hideme = false;
+                      artist.showme = true;
+                    });
+                  } else {
+                    this.ngZone.run(() => {
+                      console.log("what");
+                      console.log(this.radiusValue);
+                      artist.showme = false;
                     });
                   }
-                  
+
               } else {
                  alert('Geocode was not successful for the following reason: ' + status);
                }
@@ -154,11 +163,11 @@ onSelect() {
           this.distance = google.maps.geometry.spherical.computeDistanceBetween(this.inputLocation, this.artistLocation);
           if(this.distance > this.radiusValue ){
             this.ngZone.run(() => {
-              artist.hideme = true;
+              artist.showme = true;
             });
           } else{
             this.ngZone.run(() => {
-              artist.hideme = false;
+              artist.showme = false;
             });
           }
 
