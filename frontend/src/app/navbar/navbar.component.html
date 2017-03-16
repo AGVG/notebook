@@ -13,9 +13,11 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="links">
-      <ul class="nav navbar-nav navbar-right">
-
+      <ul class="nav navbar-nav navbar-right down">
+        <li><a [routerLink]="['artists']">Artists</a></li>
+        <li><a [routerLink]="['venues']">Venues</a></li>
         <li *ngIf="!isAuth"><a [routerLink]="['login']">Login</a></li>
+        <li *ngIf="isAuth"><a [routerLink]="[user.username]">Your account</a></li>
         <li *ngIf="isAuth"><a (click)="logout()">Logout</a></li>
         <li *ngIf="!isAuth"><a [routerLink]="['signup']">Signup</a></li>
       </ul>

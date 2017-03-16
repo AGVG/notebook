@@ -105,6 +105,16 @@ router.post("/signup", (req, res, next) => {
   });
 });
 
+router.get('/user', (req, res, next) => {
+  User.find({})
+    .exec((err, User) => {
+      if (err) {
+        return res.send(err);
+      }
+      return res.json(User);
+    });
+});
+
 
 
 module.exports = router;

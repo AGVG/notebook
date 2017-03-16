@@ -4,3 +4,8 @@
   border-radius: 0;
   margin-bottom: 30px;
 }
+
+.down{
+  position: relative;
+  top: 17px;
+}

@@ -45,6 +45,7 @@ h3 {
   padding-left: 52px;
   padding-top: 10px;
   padding-right:52px;
+  padding-bottom: 15px;
 }
 
 .details{
@@ -53,4 +54,15 @@ h3 {
 
 .hidder{
   display:none;
+}
+
+ul{
+  max-width: 100%;
+  word-break: break-all;
+}
+
+hr{
+  color: black;
+  background-color: black;
+  height: 2px;
 }

@@ -11,13 +11,16 @@ const venueSchema = new mongoose.Schema({
     type: String,
     required: [true, 'A name is required']
   },
-  description: [{
+  description: {
     type: String,
     // required: [true, 'A description is required']
-  }],
+  },
   location: {
     type: String,
     // required: [true, 'A location is required']
+  },
+  offer: {
+    type: Boolean,
   }
 });
 

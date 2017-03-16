@@ -68,7 +68,7 @@ export class ArtistListComponent implements OnInit {
         {value:'30000', text:'30 km'},
         {value:'100000', text:'100 km'},
         {value:'200000', text:'200 km'},
-        {value:'6371000', text:'All Artists'},
+        {value:'63710000', text:'All Artists'},
     ];
 
   query = '';
@@ -82,6 +82,7 @@ export class ArtistListComponent implements OnInit {
   radiusValue: number;
   inputLocation;
   array;
+  hider: any = {};
 
   constructor(
     private artist: ArtistService,
@@ -94,9 +95,10 @@ ngOnInit() {
   this.artist.getList()
     .subscribe((result) =>{
       this.artists = result;
-      // this.artists.forEach((artist) =>{
-      //   artist.showme = true;
-      // })
+      this.artists.forEach((artist) =>{
+        artist.showme = true;
+        artist.hider = false;
+      })
 
         let input = document.getElementById('location');
         let autocomplete = new google.maps.places.Autocomplete(input);

@@ -1,0 +1,52 @@
+<div *ngIf="tradeInfo && userInfo.type === 'Venue'" [hidden]="hider">
+  <br>
+  <ul>
+    <li>{{tradeInfo.name}}</li>
+    <hr>
+    <li>{{tradeInfo.location}}</li>
+    <hr>
+    <li>{{tradeInfo.description}}</li>
+  </ul>
+  <div *ngIf="userInfo.username === user.username">
+  <a (click)="editor()">Edit</a>
+  </div>
+</div>
+
+<div *ngIf="tradeInfo && userInfo.type === 'Artist'" [hidden]="hider">
+  <br>
+  <ul>
+    <li>{{tradeInfo.name}}</li>
+    <hr>
+    <li>{{tradeInfo.location}}</li>
+    <hr>
+    <li *ngFor="let one of tradeInfo.genre" class="list">&#9836;&nbsp;<em>{{one}}</em></li>
+  </ul>
+  <div *ngIf="userInfo.username === user.username">
+  <a (click)="editor()">Edit</a>
+  </div>
+</div>
+
+<div *ngIf="hider === true && userInfo.type === 'Venue'">
+  <ul>
+    <li><input type="text" [value]="tradeInfo.name"></li>
+    <li><input type="text" [value]="tradeInfo.location"></li>
+    <li><textarea type="text" [value]="tradeInfo.description"></textarea></li>
+  </ul>
+  <a (click)="hider=false">submit</a>
+</div>
+
+<div *ngIf="hider === true && userInfo.type === 'Artist'">
+  <ul>
+    <li><input type="text" [value]="tradeInfo.name"></li>
+    <li><input type="text" [value]="tradeInfo.location"></li>
+    <li>
+      <label>Pick one or more genre</label>
+      <select multiple class="form-control" size='8' [(ngModel)]="genre" name="genre">
+        <option  *ngFor="let genre of genres" value='{{genre}}'>
+        {{genre}}
+        </option>
+      </select>
+    </li>
+  </ul>
+  <a (click)="hider=false">submit</a>
+</div>

@@ -26,15 +26,16 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.session.login(this.user)
-				        .subscribe(result => {
-				            if (result === true) {
-			                // login successful
-			                this.router.navigate(['/']);
-			         			} else {
-			                // login failed
-			                this.error = 'Username or password is incorrect';
-				            }
-				        });
+		  .subscribe(result => {
+			  if (result === true) {
+			    // login successful
+          console.log(this.user);
+			    this.router.navigate(['/']);
+			  } else {
+			    // login failed
+			    this.error = 'Username or password is incorrect';
+				}
+		  });
   }
 
 }

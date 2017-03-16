@@ -11,6 +11,7 @@ declare let google:any;
 export class VenueListComponent implements OnInit {
   venues;
   hideme: any = {};
+  hider: any = {};
 
   constructor(
     private venue: VenueService,
@@ -27,6 +28,7 @@ export class VenueListComponent implements OnInit {
         this.venues = result;
         let markerArray = [];
         this.venues.forEach((venue) => {
+          venue.hider = false;
           let geocoder = new google.maps.Geocoder();
           geocoder.geocode( { 'address': venue.location }, (results, status) => {
 

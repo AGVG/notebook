@@ -7,9 +7,10 @@ var bodyParser   = require('body-parser');
 const passport   = require('./config/passport');
 const cors       = require('cors');
 
-var auth    = require('./routes/auth');
-var artists = require('./routes/artists');
-var venues  = require('./routes/venues');
+var auth     = require('./routes/auth');
+var artists  = require('./routes/artists');
+var users    = require('./routes/users');
+var venues   = require('./routes/venues');
 
 require('./config/database');
 var app = express();
@@ -32,6 +33,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', auth);
+app.use('/api/users', users);
 app.use('/api/venues', venues);
 app.use('/api/artists', artists);
 

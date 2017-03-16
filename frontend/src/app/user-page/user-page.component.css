@@ -1,0 +1,5 @@
+.list{
+  display:inline !important;
+  max-width: 100%;
+  word-break: break-all;
+}

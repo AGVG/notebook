@@ -4,12 +4,28 @@
     <input class="form-control" id="location" placeholder="Enter an Address" name="location">
   </div>
   <div id="map-canvas"></div>
-  <div *ngFor="let venue of venues" class="item">
-    <div [hidden]="venue.hideme">
-      <h3> {{ venue.name }} </h3>
-      <p> {{ venue.description }} </p>
-      <p> {{ venue.location }} </p>
-      <a [routerLink]="['/venue', venue._id]"> View Details </a>
-    </div>
+
+  <br><br>
+
+  <div *ngFor="let venue of venues" class="item" [hidden]="venue.hideme">
+      <div class="box">
+        <div class="title"><h4>&nbsp;{{ venue.name }}</h4></div>
+          <div class="info">
+          <ul>
+            <li *ngIf="venue.hider === false"><a (click)="venue.hider = true" class="details"><img src="../../assets/images/coda.png">&nbsp;View Description</a></li>
+            <li *ngIf="venue.hider === true"><a (click)="venue.hider = false" class="details"><img src="../../assets/images/coda.png">&nbsp;Hide Description</a></li>
+            <hr class="bolder">
+            <div *ngIf="venue.hider === true">
+            <li><em>{{ venue.location }}</em>&nbsp;</li>
+            <hr>
+            <li>{{ venue.description }}</li>
+            <hr class="bolder">
+          </div>
+          </ul>
+        </div>
+      </div>
+
+      <br><br>
+
   </div>
 </div>
